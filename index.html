@@ -15,7 +15,7 @@
 
 <script>
 // Assuming you have an API endpoint from API Gateway
-const apiEndpoint = 'YOUR_API_GATEWAY_ENDPOINT_HERE';
+const apiEndpoint = 'https://4v31bub7ih.execute-api.us-west-2.amazonaws.com/dev';
 
 document.getElementById('uploadForm').onsubmit = async (e) => {
     e.preventDefault();
@@ -23,28 +23,35 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
     const fileInput = document.getElementById('imageFile');
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
+        const filename = file.name;
+        const timestamp = new Date().toISOString();
+        const uniqueFilename = `${filename}-${timestamp}`;
 
         try {
-            // Example: Fetching a presigned URL from your API
+            // Fetching a presigned URL from your API, including the filename in the request
             const response = await fetch(apiEndpoint, {
                 method: 'POST',
-                // Additional headers or body may be required depending on your API configuration
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ filename: uniqueFilename })
             });
 
             const data = await response.json();
             const presignedUrl = data.url; // Ensure your API returns the presigned URL in this format
+            const objectName = data.objectName; // Assuming your API also returns the final object name to be used
 
             // Use the presigned URL to upload the file directly to S3
             const uploadResponse = await fetch(presignedUrl, {
                 method: 'PUT',
                 headers: {
-                    'Content-Type': 'image/jpeg' // or the correct MIME type of your file
+                    'Content-Type': file.type // Using the file's MIME type
                 },
                 body: file
             });
 
             if (uploadResponse.ok) {
-                alert('Image uploaded successfully.');
+                alert('Image uploaded successfully.\n' + `Stored as: ${objectName}`);
             } else {
                 alert('Failed to upload the image.');
             }
