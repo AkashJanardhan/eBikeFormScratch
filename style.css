@@ -7,11 +7,15 @@ body {
 }
 
 .upload-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     max-width: 600px;
     margin: 50px auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex-direction: column; /* Stack items vertically */
 }
 
 .upload-form h2 {
@@ -27,12 +31,6 @@ body {
     border-radius: 5px;
     font-size: 16px;
     width: 200px; /* Sets a specific width for both */
-}
-
-.submit-btn {
-    background-color: #28a745;
-    color: #fff;
-    border: none;
 }
 
 .file-upload-label {
@@ -74,5 +72,46 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+/* Ensure the .auth-form class has a specific max-width and width */
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Ensure form takes the full width of its container */
+    max-width: 400px; /* Adjust this value to match your design */
+    margin: auto; /* Center the form in its container */
+}
+
+/* Style all input fields within .auth-form to take full width */
+.auth-form input {
+    width: 100%; /* Make input take full width of the .auth-form */
+    margin-bottom: 15px; /* Add some space between the inputs */
+    height: 40px; /* Fixed height for all inputs */
+    padding: 0 10px; /* Padding inside the inputs */
+    font-size: 16px; /* A readable font size */
+    border-radius: 5px; /* Optional: Rounded corners for aesthetics */
+    border: 1px solid #ccc; /* A light border around the inputs */
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+}
+
+/* Button styling */
+.submit-btn {
+    background-color: #28a745; /* Bootstrap primary color */
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px; /* Make the button text a bit larger */
+}
+
+.upload-container a {
+    color: #007bff; /* Bootstrap primary color for links */
+    text-decoration: none;
+}
+
+.upload-container a:hover {
+    text-decoration: underline; /* Add underline on hover for better indication */
 }
 
