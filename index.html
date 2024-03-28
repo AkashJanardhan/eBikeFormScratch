@@ -51,7 +51,7 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
                 const uploadResponse = await fetch(presignedUrl, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': file.type // Use the file's actual MIME type
+                        'Content-Type': image/jpeg // Use the file's actual MIME type
                     },
                     body: file
                 });
