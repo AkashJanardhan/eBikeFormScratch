@@ -23,6 +23,7 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
     const fileInput = document.getElementById('imageFile');
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
+        const contentType = file.type;
 
         try {
             // Fetching a presigned URL from your API, including the filename in the request
@@ -51,7 +52,7 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
                 const uploadResponse = await fetch(presignedUrl, {
                     method: 'PUT',
                     headers: {
-                        'Content-Type': image/jpeg // Use the file's actual MIME type
+                        'Content-Type': contentType // Use the file's actual MIME type
                     },
                     body: file
                 });
