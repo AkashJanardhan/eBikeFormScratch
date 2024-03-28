@@ -32,7 +32,10 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ filename: file.name }) // Assuming you're sending the file name to your API
+                body: JSON.stringify({
+                    filename: file.name,
+                    contentType: file.type // This sets the content type correctly
+                }) 
             });
 
             if (response.ok) {
