@@ -40,6 +40,7 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
             const data = await response.json();
             const presignedUrl = data.url; // Ensure your API returns the presigned URL in this format
             const objectName = data.objectName; // Assuming your API also returns the final object name to be used
+            console.log('Object name : " ${objectName}');
 
             // Use the presigned URL to upload the file directly to S3
             const uploadResponse = await fetch(presignedUrl, {
@@ -51,8 +52,10 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
             });
 
             if (uploadResponse.ok) {
+                console.log('Image uploaded successfully.\n' + `Stored as: ${objectName}`)
                 alert('Image uploaded successfully.\n' + `Stored as: ${objectName}`);
             } else {
+                console.log('Failed to upload the image.')
                 alert('Failed to upload the image.');
             }
         } catch (error) {
