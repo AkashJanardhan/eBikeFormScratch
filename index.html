@@ -2,26 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>E-Bike Image Upload</title>
+    <title>Sign In - E-Bike Image Upload</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+    
 <div class="upload-container">
-    <h2 style="text-align: center;">Upload E-Bike Image</h2>
-
-    <form id="uploadForm" class="upload-form">
-        <label for="imageFile" class="file-upload-label">
-            Choose a file
-            <input type="file" id="imageFile" name="file" class="file-input" accept="image/*">
-        </label>
-        <span id="fileName" class="file-name">No file chosen</span>
-        <img id="imagePreview" src="" class="image-preview" alt="Image preview" style="display: none;">
-        <button type="submit" class="submit-btn">Upload Image</button>
+    <h2>Sign In to Your Account</h2>
+    <form id="signInForm" class="auth-form">
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button type="submit" class="submit-btn">Sign In</button>
     </form>
+    <p>Don't have an account? <a href="signup.html">Sign up</a></p>
 </div>
 
-<script src="./index.js"></script>
+    <script src="aws-cognito-sdk.min.js"></script>
+    <script src="amazon-cognito-identity.min.js"></script>
+    <script src="index.js"></script>
 
 </body>
 </html>
