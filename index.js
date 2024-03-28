@@ -62,3 +62,31 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
         alert('Please select a file to upload.');
     }
 };
+
+document.addEventListener('DOMContentLoaded', function() {
+    const fileInput = document.getElementById('imageFile');
+    const fileNameDisplay = document.getElementById('fileName');
+    const imagePreview = document.getElementById('imagePreview');
+
+    fileInput.addEventListener('change', function(e) {
+        const file = e.target.files[0];
+
+        // Display the file name
+        fileNameDisplay.textContent = file ? file.name : 'No file chosen';
+
+        // Display an image preview
+        if (file && file.type.startsWith('image/')) {
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imagePreview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = '';
+            imagePreview.style.display = 'none';
+        }
+    });
+});

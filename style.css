@@ -1,0 +1,78 @@
+/* Basic reset for body margins and padding */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+}
+
+.upload-container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.upload-form h2 {
+    color: #333;
+}
+
+.submit-btn, .file-upload-label {
+    display: block;
+    margin: 20px auto; /* Centers the button */
+    padding: 10px 20px; /* Uniform padding */
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    width: 200px; /* Sets a specific width for both */
+}
+
+.submit-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+}
+
+.file-upload-label {
+    background-color: #007bff;
+    color: #fff;
+    /* Adjustments specific to file-upload-label */
+}
+
+
+.file-input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
+}
+
+.file-upload-label:hover {
+    background-color: #0069d9;
+}
+
+.file-name {
+    display: block;
+    margin-top: 10px;
+    color: #666;
+    text-align: center;
+}
+
+.image-preview {
+    max-width: 60%;
+    max-height: 60%;
+    margin-top: 20px;
+    border-radius: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+

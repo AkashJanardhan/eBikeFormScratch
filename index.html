@@ -3,18 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>E-Bike Image Upload</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<h2>Upload E-Bike Image</h2>
+<div class="upload-container">
+    <h2 style="text-align: center;">Upload E-Bike Image</h2>
 
-<form id="uploadForm">
-    <input type="file" id="imageFile" name="file">
-    <button type="submit">Upload Image</button>
-</form>
+    <form id="uploadForm" class="upload-form">
+        <label for="imageFile" class="file-upload-label">
+            Choose a file
+            <input type="file" id="imageFile" name="file" class="file-input" accept="image/*">
+        </label>
+        <span id="fileName" class="file-name">No file chosen</span>
+        <img id="imagePreview" src="" class="image-preview" alt="Image preview" style="display: none;">
+        <button type="submit" class="submit-btn">Upload Image</button>
+    </form>
+</div>
 
-<script src="./index.js">
-</script>
+<script src="./index.js"></script>
 
 </body>
 </html>
