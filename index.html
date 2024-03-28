@@ -23,9 +23,6 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
     const fileInput = document.getElementById('imageFile');
     if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
-        const filename = file.name;
-        const timestamp = new Date().toISOString();
-        const uniqueFilename = `${filename}-${timestamp}`;
 
         try {
             // Fetching a presigned URL from your API, including the filename in the request
@@ -34,30 +31,40 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ filename: uniqueFilename })
+                body: JSON.stringify({ filename: file.name }) // Assuming you're sending the file name to your API
             });
 
-            const data = await response.json();
-            const presignedUrl = data.url; // Ensure your API returns the presigned URL in this format
-            const objectName = data.objectName; // Assuming your API also returns the final object name to be used
-            console.log('Presigned URL:', presignedUrl);
-            console.log('Object Name:', objectName);
+            if (response.ok) {
+                const responseBody = await response.json();
+                
+                // The API response's 'body' is a JSON-encoded string, so parse it as JSON
+                const data = JSON.parse(responseBody.body);
 
-            // Use the presigned URL to upload the file directly to S3
-            const uploadResponse = await fetch(presignedUrl, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': file.type // Using the file's MIME type
-                },
-                body: file
-            });
+                const presignedUrl = data.url; // Extracting the presigned URL from the parsed data
+                const objectName = data.objectName; // Extracting the object name from the parsed data
+                
+                // Log the presigned URL and object name to the console
+                console.log('Presigned URL:', presignedUrl);
+                console.log('Object Name:', objectName);
 
-            if (uploadResponse.ok) {
-                console.log('Image uploaded successfully.\n' + `Stored as: ${objectName}`)
-                alert('Image uploaded successfully.\n' + `Stored as: ${objectName}`);
+                // Use the presigned URL to upload the file directly to S3
+                const uploadResponse = await fetch(presignedUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': file.type // Use the file's actual MIME type
+                    },
+                    body: file
+                });
+
+                if (uploadResponse.ok) {
+                    alert('Image uploaded successfully.\n' + `Stored as: ${objectName}`);
+                } else {
+                    alert('Failed to upload the image.');
+                }
             } else {
-                console.log('Failed to upload the image.')
-                alert('Failed to upload the image.');
+                // Handle HTTP errors
+                console.error('HTTP Error:', response.statusText);
+                alert('Failed to fetch presigned URL.');
             }
         } catch (error) {
             console.error('Error uploading image:', error);
@@ -67,6 +74,7 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
         alert('Please select a file to upload.');
     }
 };
+
 </script>
 
 </body>
