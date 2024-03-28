@@ -40,7 +40,8 @@ document.getElementById('uploadForm').onsubmit = async (e) => {
             const data = await response.json();
             const presignedUrl = data.url; // Ensure your API returns the presigned URL in this format
             const objectName = data.objectName; // Assuming your API also returns the final object name to be used
-            console.log('Object stored as\n' + `Stored as: ${objectName}`)
+            console.log('Presigned URL:', presignedUrl);
+            console.log('Object Name:', objectName);
 
             // Use the presigned URL to upload the file directly to S3
             const uploadResponse = await fetch(presignedUrl, {
